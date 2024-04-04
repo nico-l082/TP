@@ -1,0 +1,31 @@
+#include <stdio.h>
+int main(void)
+{
+    int v[10];
+    int may = 0;
+    int repe = 0;
+    int i;
+
+
+    printf("Ingrese 10 numeros:\n");
+
+    for (i = 0; i < 10; i++)
+    {
+        scanf("%i", &v[i]);
+    }
+
+    for(i = 0; i < 10; i++)
+    {
+        if(v[i] > may)
+        {
+            may = v[i];
+            repe = 0;
+        }
+
+        if(v[i] == may)
+        {
+            repe++;
+        }
+    }
+    printf("El mayor es %i y se repite %i", may, repe);
+}
