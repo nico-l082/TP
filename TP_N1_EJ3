@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+#define MAX_ITEMS 100
+
+typedef struct {
+    char articulo[50];
+    float precio;
+    int cantidad;
+    float importe;
+} Item;
+
+float calcular_importe(float precio, int cantidad) {
+    return precio * cantidad;
+}
+
+int main() {
+    int tipo_factura, cantidad_items, i;
+    float promedio_importe, mayor_valor = 0;
+    Item items[MAX_ITEMS], mayor_item;
+
+    printf("Ingrese el tipo de factura (1: Responsable Inscripto, 2: Consumidor Final, 3: Bienes y Servicios): ");
+    scanf("%d", &tipo_factura);
+
+    printf("Ingrese la cantidad de ítems en la factura: ");
+    scanf("%d", &cantidad_items);
+
+    for (i = 0; i < cantidad_items; i++) {
+        printf("\nÍtem %d:\n", i + 1);
+        printf("Nombre del artículo: ");
+        scanf("%s", items[i].articulo);
+        printf("Precio por unidad: ");
+        scanf("%f", &items[i].precio);
+        printf("Cantidad: ");
+        scanf("%d", &items[i].cantidad);
+        items[i].importe = calcular_importe(items[i].precio, items[i].cantidad);
+        if (items[i].importe > mayor_valor) {
+            mayor_valor = items[i].importe;
+            mayor_item = items[i];
+        }
+    }
+
+    printf("\nÍtem de mayor valor:\n");
+    printf("Artículo: %s\n", mayor_item.articulo);
+    printf("Precio: %.2f\n", mayor_item.precio);
+    printf("Cantidad: %d\n", mayor_item.cantidad);
+    printf("Importe: %.2f\n", mayor_item.importe);
+
+    float suma_importes = 0;
+    for (i = 0; i < cantidad_items; i++) {
+        suma_importes += items[i].importe;
+    }
+    promedio_importe = suma_importes / cantidad_items;
+    printf("\nPromedio de importe: %.2f\n", promedio_importe);
+
+    return 0;
+}
